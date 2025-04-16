@@ -101,7 +101,6 @@ app.use('/login', async (req,res) => {
         res.status(500).json({'message':`${err.message}`});
     }
 });
-
 app.use("/dashboard", userAuth, (req,res) => {
     const user = req.user;
     console.log("User ID:", user._id);
@@ -205,7 +204,79 @@ app.use('/profile', require('./routes/api/protected'));
 app.use('/retrieveData', require('./routes/api/retrieveData'));
 app.use('/logout', require('./routes/api/logout'));
 
+app.use("/forgotpassword", (req,res) => {
+    res.sendFile(path.join(__dirname,"public","reset-password.html"));
+});
 
+
+
+app.post('/api/resetpassword', async (req, res) => {
+    try {
+        const { password, intoken, email } = req.body;
+
+        const resetPasswordToken = require('./model/resetPassword');
+        const tokenRecord = await resetPasswordToken.find({ email, token: intoken });
+
+        if (!tokenRecord) {
+            return res.status(404).json({ message: "Invalid token or email" });
+        }
+
+        // Delete the token after validation
+        await resetPasswordToken.deleteOne({ email, token: intoken });
+
+        const user = await RegisteredBase.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const hashedPwd = await bcrypt.hash(password, 10);
+        user.password = hashedPwd;
+
+        await user.save();
+        res.json({ message: "Password reset successfully!" });
+    } catch (err) {
+        console.error("Error resetting password:", err.message);
+        res.status(500).json({ message: `Server error: ${err.message}` });
+    }
+});
+
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
+app.use('/api/forgotpassword',async (req, res) => {
+    const token = crypto.randomBytes(20).toString('hex');
+    const email = req.body.email;
+    const transporter = nodemailer.createTransport({
+            service:'gmail',
+            host:'smtp.gmail.com',
+            port:587,
+            secure:false,
+            auth: {
+                user:process.env.USER,
+                pass:process.env.PASSWORD
+            }
+        });
+        
+        try {
+            await transporter.sendMail({
+                from:{
+                    name:'Food For All',
+                    address:process.env.USER
+                },
+                to:email,
+                subject:'Reset Password Request',
+                text:'Link: http://localhost:3500/forgotpassword?token=' + token+"&email=" + email,
+            });
+
+            console.log('Email sent successfully to:', email);
+        } catch(err) {
+            console.error('Error sending email:', err);
+        }
+
+        // userTokens[email] = token;
+
+        res.json({message:"Email sent successfully"});
+});
 
 app.use("/donate", userAuth, (req,res) => {
     res.sendFile(path.join(__dirname,"public","donate.html"));

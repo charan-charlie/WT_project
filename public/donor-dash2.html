@@ -43,13 +43,19 @@
                 <h4>Donor Dashboard</h4>
                 <a href="#" onclick="showSection('dashboard')">Home</a>
                 <a href="/donate">Donate Food</a>
+                <a onclick='portSwitch()'>Food prediction</a>
                 <a href="#" onclick="showSection('donations')">Past Donations</a>
                 <a href="#" onclick="showSection('messages')">Messages</a>
                 <a href="#" onclick="showSection('notifications')">Notifications</a>
                 <a href="#" onclick="showProfile()">Profile</a>
                 <a href="#" onclick="handleLogout()">Logout</a>
             </nav>
-
+            <script>
+                function portSwitch() {
+                    
+                    window.location.href = `http://localhost:8000`;
+                }
+            </script>
             <!-- Main Content -->
             <main class="col-md-10 content">
                 <!-- Dashboard Section -->

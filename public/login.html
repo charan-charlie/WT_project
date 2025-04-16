@@ -121,12 +121,31 @@
                 <hr>
                 <div class="text-center">
                     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#registrationModal">Register</button>
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#forgotModal" >Forgot Passowrd</button>
                 </div>
               
             </div>
         </div>
     </div>
 </div>
+<!-- Forgot Modal-->
+<div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotModalLabel">Forgot Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="forgotForm">
+                    <div class="mb-3">
+                        <label for="forgotEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="forgotEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Reset Link</button>
+                </form>
+            </div>
+    </div>
     <!-- Registration Modal -->
     <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -500,13 +519,26 @@
         });
 
         
-        async function forgotPassword() {
+        document.getElementById("forgotForm").addEventListener('submit', e => {
+            e.preventDefault();
             try {
                 // Placeholder for forgot password function
+
+                const email = document.getElementById("forgotEmail").value;
+                fetch(`/api/forgotpassword`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email:email })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    window.location.href = '/forgot-password?token='+data.token;
+                });
             } catch(err) {
                 console.log(err.message);
             }
-        }
+        });
     </script>
 </body>
 </html>
