@@ -128,7 +128,7 @@
         </div>
     </div>
 </div>
-<!-- Forgot Modal-->
+<!-- Forgot Modal -->
 <div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -145,124 +145,126 @@
                     <button type="submit" class="btn btn-primary w-100">Send Reset Link</button>
                 </form>
             </div>
+        </div>
     </div>
-    <!-- Registration Modal -->
-    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registrationModalLabel">Registration</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="registrationForm">
+</div>
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registrationModalLabel">Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm">
+                    <div class="mb-3">
+                        <label class="form-label">Register as:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="registrationType" id="userRegistration" value="user" checked>
+                            <label class="form-check-label" for="userRegistration">User</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="registrationType" id="corporationRegistration" value="corporation">
+                            <label class="form-check-label" for="corporationRegistration">Corporation/Institution</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="registrationType" id="ngoRegistration" value="ngo">
+                            <label class="form-check-label" for="ngoRegistration">NGO</label>
+                        </div>
+                    </div>
+
+                    <!-- Corporation Registration Fields -->
+                    <div id="corporationFields" style="display: none;">
                         <div class="mb-3">
-                            <label class="form-label">Register as:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="registrationType" id="userRegistration" value="user" checked>
-                                <label class="form-check-label" for="userRegistration">User</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="registrationType" id="corporationRegistration" value="corporation">
-                                <label class="form-check-label" for="corporationRegistration">Corporation/Institution</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="registrationType" id="ngoRegistration" value="ngo">
-                                <label class="form-check-label" for="ngoRegistration">NGO</label>
-                            </div>
+                            <label for="corporationName" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="corporationName" id="corporationName">
                         </div>
-
-                        <!-- Corporation Registration Fields -->
-                        <div id="corporationFields" style="display: none;">
-                            <div class="mb-3">
-                                <label for="corporationName" class="form-label">Name</label>
-                                <input type="text" class="form-control" name="corporationName" id="corporationName">
-                            </div>
-                            <div class="mb-3">
-                                <label for="corporationEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="corporationEmail" id="corporationEmail">
-                            </div>
-                            <div class="mb-3">
-                                <label for = "corporationPassword" class = "form-label">Password</label>
-                                <input type = "password" class = "form-control" name="corporationPassword" id = "corporationPassword">
-                            </div>
-                            <div class="mb-3">
-                                <label for="corporationType" class="form-label">Type</label>
-                                <select class="form-select" name="corporationType" id="corporationType">
-                                    <option value="Corporation">Corporation</option>
-                                    <option value="Mess">Institution mess</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="corporationContact" class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control" name="corporationContact" id="corporationContact">
-                            </div>
-                        </div>
-
-                        <!-- User Registration Fields -->
-                        <div id="userFields">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" name = "username" id="username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="userEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" name = "userEmail" id="userEmail" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="userPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" name = "userPassword" id ="userPassword" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="userAge" class="form-label">Age</label>
-                                <input type="number" class="form-control" name = "userAge" id="userAge" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="userContact" class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control" name="userContact" id="userContact" required>
-                            </div>
-                        </div>
-
-                        <!-- NGO Registration Fields -->
-                        <div id="ngoFields" style="display: none;">
-                            <div class="mb-3">
-                                <label for = "ngoUsername" class="form-label">Name</label>
-                                <input type="text" class="form-control" name = "ngoUsername" id="ngoUsername">
-                            </div>
-                            <div class="mb-3">
-                                <label for="ngoEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" name = "ngoEmail" id="ngoEmail">
-                            </div>
-                            <div class="mb-3">
-                                <label for="ngoPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" name = "ngoPassword" id ="ngoPassword">
-                            </div>
-                            <div class="mb-3">
-                                <label for="details" class="form-label">Tell us something that highlights 'Food Needs'</label>
-                                <textarea class="form-control" name = "details" id="details" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="ngoContact" class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control" name="ngoContact" id="ngoContact">
-                            </div>
-                        </div>
-
-                        <!-- Location Section -->
                         <div class="mb-3">
-                            <label for="address" class="form-label">Location / Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Your address will appear here" readonly required>
+                            <label for="corporationEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="corporationEmail" id="corporationEmail">
                         </div>
-                        <input type="hidden" id="lat" name="lat">
-                        <input type="hidden" id="lon" name="lon">
-                        <button type="button" class="btn btn-secondary mb-2" onclick="getLocation()">Get My Location</button>
-                        <div id="map"></div>
+                        <div class="mb-3">
+                            <label for = "corporationPassword" class = "form-label">Password</label>
+                            <input type = "password" class = "form-control" name="corporationPassword" id = "corporationPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label for="corporationType" class="form-label">Type</label>
+                            <select class="form-select" name="corporationType" id="corporationType">
+                                <option value="Corporation">Corporation</option>
+                                <option value="Mess">Institution mess</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="corporationContact" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" name="corporationContact" id="corporationContact">
+                        </div>
+                    </div>
 
-                        <button type="submit" class="btn btn-primary w-100" id="registerButton">Register as User</button>
-                    </form>
-                </div>
+                    <!-- User Registration Fields -->
+                    <div id="userFields">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name = "username" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name = "userEmail" id="userEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" name = "userPassword" id ="userPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userAge" class="form-label">Age</label>
+                            <input type="number" class="form-control" name = "userAge" id="userAge" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userContact" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" name="userContact" id="userContact" required>
+                        </div>
+                    </div>
+
+                    <!-- NGO Registration Fields -->
+                    <div id="ngoFields" style="display: none;">
+                        <div class="mb-3">
+                            <label for = "ngoUsername" class="form-label">Name</label>
+                            <input type="text" class="form-control" name = "ngoUsername" id="ngoUsername">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngoEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name = "ngoEmail" id="ngoEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngoPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" name = "ngoPassword" id ="ngoPassword">
+                        </div>
+                        <div class="mb-3">
+                            <label for="details" class="form-label">Tell us something that highlights 'Food Needs'</label>
+                            <textarea class="form-control" name = "details" id="details" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngoContact" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" name="ngoContact" id="ngoContact">
+                        </div>
+                    </div>
+
+                    <!-- Location Section -->
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Location / Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Your address will appear here" readonly required>
+                    </div>
+                    <input type="hidden" id="lat" name="lat">
+                    <input type="hidden" id="lon" name="lon">
+                    <button type="button" class="btn btn-secondary mb-2" onclick="getLocation()">Get My Location</button>
+                    <div id="map"></div>
+
+                    <button type="submit" class="btn btn-primary w-100" id="registerButton">Register as User</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
