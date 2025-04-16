@@ -98,6 +98,16 @@
                                         <button class="btn btn-info" onclick="window.location.href='/donation-details.html?id=${donation._id}'">
                                             <i class="fas fa-info-circle"></i> View Full Details
                                         </button>
+                                        ${donation.status !== 'completed' ? `
+                                            <button class="btn btn-success" onclick="markAsCompleted('${donation._id}')">
+                                                <i class="fas fa-check"></i> Mark as Complete
+                                            </button>
+                                        ` : ''}
+                                        ${donation.status !== 'completed' ? `
+                                            <button class="btn btn-warning" onclick="unclaimDonation('${donation._id}')">
+                                                <i class="fas fa-times"></i> Unclaim
+                                            </button>
+                                        ` : ''}
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +117,7 @@
                 container.appendChild(card);
             });
         }
-
+        
         async function startChat(donorId, donationId) {
             try {
                 console.log('Starting chat with donor:', { donorId, donationId });
@@ -136,6 +146,56 @@
             } catch (error) {
                 console.error('Error starting chat:', error);
                 alert(`Error starting chat: ${error.message}`);
+            }
+        }
+
+        async function markAsCompleted(donationId) {
+            try {
+                const response = await fetch(`/api/donations/${donationId}/complete`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to mark donation as completed');
+                }
+
+                alert('Donation marked as completed successfully!');
+                // Refresh the donations list
+                document.getElementById('claimedDonations').innerHTML = '';
+                await loadClaimedDonations();
+            } catch (error) {
+                console.error('Error marking donation as completed:', error);
+                alert('Failed to mark donation as completed');
+            }
+        }
+
+        async function unclaimDonation(donationId) {
+            if (!confirm('Are you sure you want to unclaim this donation?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/donations/${donationId}/unclaim`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to unclaim donation');
+                }
+
+                alert('Donation unclaimed successfully!');
+                // Refresh the donations list
+                document.getElementById('claimedDonations').innerHTML = '';
+                await loadClaimedDonations();
+            } catch (error) {
+                console.error('Error unclaiming donation:', error);
+                alert('Failed to unclaim donation');
             }
         }
 

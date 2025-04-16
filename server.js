@@ -127,6 +127,33 @@ app.use("/api/profile", userAuth, (req,res) => {
     }
 );
 
+app.put('/api/donations/:id/unclaim', async (req, res) => {
+    try {
+        const donationId = req.params.id;
+        
+        const updatedDonation = await Donation.findByIdAndUpdate(
+            donationId,
+            { 
+                status: 'unclaimed',
+                $unset: { claimedBy: "" }
+            },
+            { new: true }
+        );
+
+        if (!updatedDonation) {
+            return res.status(404).json({ message: 'Donation not found' });
+        }
+
+        res.json({ 
+            message: 'Donation unclaimed successfully',
+            donation: updatedDonation 
+        });
+    } catch (error) {
+        console.error('Error unclaiming donation:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 app.put('/api/donations/:id/complete', async (req, res) => {
     try {
         const donationId = req.params.id;
