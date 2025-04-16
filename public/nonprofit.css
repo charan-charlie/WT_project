@@ -1,0 +1,15 @@
+body {
+    background: url('hero.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+#food{
+    background:url('5.jpg') no-repeat center ;
+    background-size: cover;
+}
+div h5{
+    color:rgb(17, 240, 61);
+    font-size:200%;
+}
