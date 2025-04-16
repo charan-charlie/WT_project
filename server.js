@@ -12,7 +12,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const server = http.createServer(app);
 const io = socketIo(server);
-
+const sendEmail = require('./routes/api/mail');
 const fs = require('fs');
 const { Chat } = require('./model/chat');
 
@@ -259,6 +259,8 @@ app.post('/api/donation', userAuth, upload.single('food_image'), async (req, res
     };
 
     console.log(donation);
+    
+
     const newDonation = await Donation.create(donation);
 
     newDonation.save()

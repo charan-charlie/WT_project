@@ -1,12 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const sendEmail = require('./mail');
 const { Donation } = require('../../model/donation.js');
+const { RegisteredBase } = require('../../model/RegisteredData.js');
 
 router.post('/', async (req, res) => {
+
+    
     try {
         const { donationId } = req.body;
-        if (!donationId) return res.status(400).json({ message: "DonationId not provided" });
         
+        const donat = await Donation.findById({_id:donationId});
+        const donor = await RegisteredBase.findById(donat.donorId);
+
+        
+        await sendEmail(donor.email, donor);
+        
+
+        if (!donationId) return res.status(400).json({ message: "DonationId not provided" });
+        console.log(req.user);
         const donation = await Donation.findByIdAndUpdate(donationId, {
             status: "claimed",
             claimedBy: {
