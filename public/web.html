@@ -11,76 +11,81 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="web.css">
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"> -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
-    
+
 </head>
 
 <body>
     <!--header Section-->
-    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary  fixed-top" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="web.html"><img src="favicon.ico" alt="FOOD Bridge logo" width="40" height="40" class="d-inline-block align-top"><b> <span style="color:rgb(211, 28, 150)">F</span><span style="color:rgb(186, 54, 226)">O</span><span style="color:rgb(41, 143, 41)">O</span><span style="color:rgb(122, 172, 230)">D</span><span style="color:blue">Bridge</span></b></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="web.html">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">ABOUT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="nonprofits.html">NON PROFITS</a>
-                        </li>
-                      
-                        <li class="nav-item">
-                            <a class="nav-link" href="faq.html">FAQ</a>
-                        </li>
-
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <div class="dropdown " style="margin-left:40px;">
-                        <button class="btn btn-secondary" onclick="gotosignup(this)" type="button" 
-                            aria-expanded="false">
-                            Login
-                        </button>
-                        <script>
-                            function gotosignup(){
-                                window.location.href = window.location.origin + "/signup";
-                            }
-                        </script>
-                        
-                    </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand" href="web.html">
+                <img src="favicon.ico" alt="FOOD Bridge logo" width="40" height="40" class="d-inline-block align-top">
+                <span class="brand-text"><b><span style="color:rgb(211, 28, 150)">F</span><span style="color:rgb(186, 54, 226)">O</span><span style="color:rgb(41, 143, 41)">O</span><span style="color:rgb(122, 172, 230)">D</span><span style="color:blue">Bridge</span></b></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="web.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="nonprofits.html">NON PROFITS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html">FAQ</a>
+                    </li>
+                </ul>
+                <div class="dropdown" style="margin-left:40px;">
+                    <button class="btn btn-secondary" onclick="gotosignup(this)" type="button" 
+                        aria-expanded="false">
+                        Login
+                    </button>
+                    <script>
+                        function gotosignup(){
+                            window.location.href = window.location.origin + "/signup";
+                        }
+                    </script>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!--Main content -->
     <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold mb-4">Bridging Food Surplus With Those In Need</h1>
+                        <p class="lead mb-4">Help reduce food waste and feed those in need through our innovative platform.</p>
+                        <button class="btn btn-primary btn-lg" onclick="gotosignup(this)">Get Started</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="4.jpg" alt="Food donation" class="img-fluid rounded-3 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!--Carousel Section-->
         <section id="carousel">
             <div id="carouselExampleIndicators" class="carousel slide ">
 
                 <div class="carousel-indicators ">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                         aria-label="Slide 3"></button>
                 </div>
 
