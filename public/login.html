@@ -10,7 +10,29 @@
         /* Custom CSS for additional styling */
         body {
             background-color: black;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('logo.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            
         }
+        .login-box {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .login-img {
+      width: 100%;
+      max-width: 350px;
+    }
+    form, form * {
+    font-family: 'Poppins', sans-serif;
+        }
+
+
         .card {
             border: none;
             border-radius: 10px;
@@ -70,12 +92,16 @@
     
 </head>
 <body>
+    
     <div class="container mt-5">
-        <!-- Logo Space -->
-        <div class="text-center mb-4">
-            <img src="logo.jpeg" alt="Logo" style="width: 150px;">
-        </div>
-
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-10 login-box d-flex flex-wrap p-4">
+                
+                <!-- Left Illustration -->
+                <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
+                  <img src="logo.jpeg" alt="Login Illustration" class="login-img">
+                </div>
+     <div class="col-md-6 px-4 py-3">
         <!-- Login Form -->
         <div class="card mx-auto" style="max-width: 400px;" id = "loginBlock">
             <div class="card-body">
@@ -94,16 +120,13 @@
                 </form>
                 <hr>
                 <div class="text-center">
-                    <button class="btn btn-outline-primary mb-2" onclick="signInWithGoogle()">Sign in with Google</button>
                     <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#registrationModal">Register</button>
                 </div>
-                <div class="text-center">
-                    <a href = "#">Forgot Password</a>
-                </div>
+              
             </div>
         </div>
     </div>
-
+</div>
     <!-- Registration Modal -->
     <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -350,7 +373,7 @@
             }
         }
 
-        function showPosition(position) {
+        async function showPosition(position) {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             document.getElementById('lat').value = lat;
@@ -363,9 +386,26 @@
                 maxZoom: 19,
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
-            L.marker([lat, lon]).addTo(map);
+
+            
+            let marker = L.marker([lat, lon]).addTo(map);
+
             // Reverse Geocode using Nominatim
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
+            map.on('click', async function(e) {
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(e.latlng).addTo(map);
+
+                await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${e.latlng.lat}&lon=${e.latlng.lng}&format=json`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        document.getElementById('address').value = data.display_name || '';
+                    })
+                    .catch(err => console.error("Reverse geocoding error:", err));
+            });
+
+            await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('address').value = data.display_name || "Address not found";

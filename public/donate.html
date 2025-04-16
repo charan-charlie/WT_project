@@ -244,12 +244,24 @@
                 foodType.add(option);
             });
         }
+        
+        
+
 
         function toggleAdditionalInfo() {
             document.getElementById("additionalInfo").style.display = document.getElementById("specifyItems").checked ? "block" : "none";
         }
         let map, marker;
-
+        async function reverseGeocode(lat, lon) {
+            console.log(lat, "he");
+            await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then((response) => response.json())
+                .then((data) => {
+                document.getElementById('address').value = data.display_name || '';
+            });
+            console.log(lat, "he");
+            
+        }
 function openMap() {
     document.getElementById("map").style.display = "block";
     setTimeout(() => {
@@ -264,7 +276,8 @@ function openMap() {
                     map.removeLayer(marker);
                 }
                 marker = L.marker(e.latlng).addTo(map);
-                document.getElementById("address").value = `Lat: ${e.latlng.lat}, Lng: ${e.latlng.lng}`;
+                //document.getElementById("address").value = `Lat: ${e.latlng.lat}, Lng: ${e.latlng.lng}`;
+                reverseGeocode(e.latlng.lat, e.latlng.lng);
                 document.getElementById("lat").value = e.latlng.lat;
                 document.getElementById("lng").value = e.latlng.lng;
             });
@@ -296,7 +309,8 @@ function getCurrentLocation() {
                     map.on('click', function(e) {
                         if (marker) { map.removeLayer(marker); }
                         marker = L.marker(e.latlng).addTo(map);
-                        document.getElementById("address").value = `Lat: ${e.latlng.lat}, Lng: ${e.latlng.lng}`;
+                        reverseGeocode(e.latlng.lat, e.latlng.lng);
+                        // document.getElementById("address").value = `Lat: ${e.latlng.lat}, Lng: ${e.latlng.lng}`;
                         document.getElementById("lat").value = e.latlng.lat;
                         document.getElementById("lng").value = e.latlng.lng;
                     });
