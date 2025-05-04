@@ -17,8 +17,8 @@ router.post('/', async (req, res) => {
         port: 587,
         secure: false,
         auth: {
-            user: process.env.USER,
-            pass: process.env.PASSWORD
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD
         }
     });
 
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         await transporter.sendMail({
             from: {
                 name: 'Food For All',
-                address: process.env.USER
+                address: process.env.EMAIL_USER
             },
             to: email,
             subject: 'Reset Password Request',

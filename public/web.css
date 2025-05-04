@@ -138,39 +138,51 @@ div h5 {
   font-size: 200%;
 }
 
-/* Footer */
+/* footer */
 footer {
-  background: var(--text-dark);
-  padding: 5rem 0;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); /* Gradient background */
+  padding: 3rem 0; /* Reduced padding */
   color: var(--text-light);
+  text-align: center; /* Center-align text */
+  position: relative;
 }
 
 footer h5 {
   color: white;
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .footer-link {
-  color: rgba(255,255,255,0.8) !important;
-  transition: var(--transition);
-  display: block;
-  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  transition: transform 0.3s ease, color 0.3s ease; /* Added transition for color and transform */
 }
 
 .footer-link:hover {
-  color: white !important;
-  transform: translateX(5px);
+  color: white; /* Brighten the link on hover */
+  transform: translateY(-5px); /* Small hover effect */
 }
 
-.font {
-  font-family: "Sofia", sans-serif;
+.footer-bottom {
+  font-size: 0.875rem; /* Smaller text for footer bottom */
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2rem;
 }
 
-* {
-  box-sizing: border-box;
+.footer-bottom a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
 }
+
+.footer-bottom a:hover {
+  color: white;
+}
+
 
 /* Modern Container Styles */
 .container {

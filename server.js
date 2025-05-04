@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         cb(null, `${req.user._id}-${Date.now()}${file.originalname}`); // Save file with a timestamp to avoid name conflicts
     }
-});
+}); 
 
 const upload = multer({ storage: storage });
 
@@ -252,8 +252,8 @@ app.use('/api/forgotpassword',async (req, res) => {
             port:587,
             secure:false,
             auth: {
-                user:process.env.USER,
-                pass:process.env.PASSWORD
+                user:process.env.EMAIL_USER,
+                pass:process.env.EMAIL_PASSWORD
             }
         });
         
@@ -261,7 +261,7 @@ app.use('/api/forgotpassword',async (req, res) => {
             await transporter.sendMail({
                 from:{
                     name:'Food For All',
-                    address:process.env.USER
+                    address:process.env.EMAIL_USER
                 },
                 to:email,
                 subject:'Reset Password Request',
